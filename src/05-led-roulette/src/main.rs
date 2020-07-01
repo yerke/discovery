@@ -8,18 +8,22 @@ use aux5::{entry, prelude::*, Delay, Leds};
 fn main() -> ! {
     let (mut delay, mut leds): (Delay, Leds) = aux5::init();
 
-    let mut half_period = 500_u16;
-    delay.delay_ms(half_period);
-    half_period = 100;
+    let mut period = 50_u16;
+    let mut tick = 0;
+    leds[0].on();
 
-    let mut current_led = 0;
     loop {
-        leds[current_led].on();
-        delay.delay_ms(half_period);
+        if tick % 2 == 0 {
+            let led_to_turn_on = (tick / 2 + 1) % 8;
+            leds[led_to_turn_on].on();
+        }
 
-        leds[current_led].off();
-        delay.delay_ms(half_period);
+        if tick % 2 == 1 {
+            let led_to_turn_off = (tick / 2) % 8;
+            leds[led_to_turn_off].off();
+        }
 
-        current_led = (current_led + 1) % 8;
+        delay.delay_ms(period);
+        tick = (tick + 1) % 16;
     }
 }
