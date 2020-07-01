@@ -12,11 +12,14 @@ fn main() -> ! {
     delay.delay_ms(half_period);
     half_period = 100;
 
+    let mut current_led = 0;
     loop {
-        leds[0].on();
+        leds[current_led].on();
         delay.delay_ms(half_period);
 
-        leds[0].off();
+        leds[current_led].off();
         delay.delay_ms(half_period);
+
+        current_led = (current_led + 1) % 8;
     }
 }
