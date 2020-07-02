@@ -8,7 +8,7 @@ use aux5::{entry, prelude::*, Delay, Leds};
 fn main() -> ! {
     let (mut delay, mut leds): (Delay, Leds) = aux5::init();
 
-    let mut period = 50_u16;
+    let period = 50_u16;
     let mut tick = 0;
     leds[0].on();
 
