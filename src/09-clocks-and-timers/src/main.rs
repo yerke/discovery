@@ -6,7 +6,9 @@ use aux9::{entry, tim6};
 #[inline(never)]
 fn delay(tim6: &tim6::RegisterBlock, ms: u16) {
     // TODO implement this
-    for _ in 0..(ms * 8) {}
+    for _ in 0..(ms * 8 * 100) {
+        aux9::nop();
+    }
 }
 
 #[entry]
